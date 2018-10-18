@@ -22,7 +22,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // 一覧画面
 Route::get('/task', function () {
-    return view('task.index');
+    $tasks = Task::orderBy('created_at', 'asc')->get();
+    return view('task.index', [
+        'tasks' => $tasks
+    ]);
 });
 
 // 新タスク追加

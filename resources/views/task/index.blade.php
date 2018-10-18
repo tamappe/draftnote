@@ -9,12 +9,12 @@
 
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
-                    @include('common.errors')
-                    <!-- new task form -->
+                @include('common.errors')
+                <!-- new task form -->
                     <form action="{{url('task')}}" method="post" class="form-horizontal">
-                        {{csrf_field()}}
+                    {{csrf_field()}}
 
-                        <!-- name -->
+                    <!-- name -->
                         <div class="form-group">
                             <label for="task-name" class="col-sm-3 control-label">Todo</label>
                             <div class="col-sm-6">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
 
-                            <!-- add button -->
+                        <!-- add button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
@@ -34,6 +34,37 @@
                 </div>
             </div>
             <!-- TODO: Current Tasks -->
+            @if(count($tasks) > 0)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        現在のToDo
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-striped task-table">
+
+                            <thead>
+                            <th>ToDo</th>
+                            <th>&nbsp;</th>
+                            </thead>
+
+                            <tbody>
+                            @foreach($tasks as $task)
+                                <tr>
+                                    <td class="table-text">
+                                        <div>{{ $task->name }}</div>
+                                    </td>
+
+                                    <td>
+                                        <!-- TODO 削除ボタン -->
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
