@@ -11,8 +11,20 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{url('/')}}">Task List</a>
-
         </div>
+        @if(Auth::check())
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{url('/logout')}}">ログアウト</a>
+            </div>
+        @else
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{url('/login')}}">ログイン</a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{url('/register')}}">ユーザー登録</a>
+            </div>
+
+        @endif
     </div>
 </nav>
 
