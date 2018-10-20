@@ -25,7 +25,7 @@ class TaskController extends Controller
         // タスク作成
         $task = new Task;
         $task->name = $request->name;
-        $task->text = "サンプル";
+        $task->text = $request->text;
         $task->save();
 
         return redirect('/tasks');
