@@ -34,3 +34,9 @@ Route::post('/task', 'TaskController@store');
 // タスク削除
 Route::delete('/task/{task}', 'TaskController@destroy');
 
+// タスク編集
+Route::get('/task/edit/{task}', 'TaskController@edit');
+
+// タスク更新
+Route::post('/task/edit', 'TaskController@update');
+

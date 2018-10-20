@@ -51,8 +51,9 @@
                         <table class="table table-striped task-table">
 
                             <thead>
-                            <th>ToDo</th>
-                            <th>&nbsp;</th>
+                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">ToDo</th>
+                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
+                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
                             </thead>
 
                             <tbody>
@@ -62,6 +63,15 @@
                                         <div>{{ $task->name }}</div>
                                     </td>
 
+                                    <td>
+                                        <form action="{{ url('task/edit/' .$task->id) }}" method="get">
+                                            {{ csrf_field() }}
+
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa fa-edit"></i>編集
+                                            </button>
+                                        </form>
+                                    </td>
                                     <td>
                                         <form action="{{ url('task/' .$task->id) }}" method="post">
                                             {{ csrf_field() }}
