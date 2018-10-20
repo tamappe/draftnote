@@ -18,37 +18,25 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// ルーティング
+Route::get('/', function (){
+    return redirect('/tasks');
+});
+
 // Tasks
 
 // 一覧画面
-Route::get('/task', function () {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
-    return view('task.index', [
-        'tasks' => $tasks
-    ]);
-});
+Route::get('/tasks', 'TaskController@index');
 
 // 新タスク追加
-Route::post('/task', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-    ]);
-
-    if ($validator->fails()){
-        return redirect('/task')->withInput()->withErrors($validator);
-    }
-
-    // タスク作成
-    $task = new Task;
-    $task->name = $request->name;
-    $task->text = "サンプル";
-    $task->save();
-
-    return redirect('/task');
-});
+Route::post('/task', 'TaskController@store');
 
 // タスク削除
-Route::delete('/task/{task}', function (Task $task) {
+Route::delete('/task/{task}', 'TaskController@destroy');
 
-});
+// タスク編集
+Route::get('/task/edit/{task}', 'TaskController@edit');
+
+// タスク更新
+Route::post('/task/edit', 'TaskController@update');
 

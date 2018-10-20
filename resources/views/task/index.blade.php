@@ -16,9 +16,16 @@
 
                     <!-- name -->
                         <div class="form-group">
-                            <label for="task-name" class="col-sm-3 control-label">Todo</label>
-                            <div class="col-sm-6">
+                            <label for="task-name" class="col-sm-3 control-label">メモタイトル</label>
+                            <div class="col-sm-8">
                                 <input type="text" name="name" id="task-name" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="task-text" class="col-sm-3 control-label">Contents:</label>
+                            <div class="col-md-8"><!-- col-md-8:幅8 -->
+                                <textarea class="form-control" rows="5" id="comment" name="text"></textarea><!-- rows:高さ -->
                             </div>
                         </div>
 
@@ -44,8 +51,9 @@
                         <table class="table table-striped task-table">
 
                             <thead>
-                            <th>ToDo</th>
-                            <th>&nbsp;</th>
+                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">ToDo</th>
+                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
+                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
                             </thead>
 
                             <tbody>
@@ -56,7 +64,23 @@
                                     </td>
 
                                     <td>
-                                        <!-- TODO 削除ボタン -->
+                                        <form action="{{ url('task/edit/' .$task->id) }}" method="get">
+                                            {{ csrf_field() }}
+
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa fa-edit"></i>編集
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ url('task/' .$task->id) }}" method="post">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i>削除
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
