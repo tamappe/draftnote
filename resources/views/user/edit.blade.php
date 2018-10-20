@@ -11,14 +11,14 @@
                     <!-- Display Validation Errors -->
                 @include('common.errors')
                 <!-- new task form -->
-                    <form action="{{url('/task/edit')}}" method="post" class="form-horizontal">
+                    <form action="{{url('/user/task/edit')}}" method="post" class="form-horizontal">
                     {{csrf_field()}}
 
                     <!-- id -->
                         <div class="form-group">
                             <input type="hidden" name="id" id="task-id" value="{{$task->id}}">
                         </div>
-                    <!-- name -->
+                        <!-- name -->
                         <div class="form-group">
                             <label for="task-name" class="col-sm-3 control-label">{{Config::get('const.memo_title')}}</label>
                             <div class="col-sm-8">

@@ -11,7 +11,7 @@
                     <!-- Display Validation Errors -->
                 @include('common.errors')
                 <!-- new task form -->
-                    <form action="{{url('task')}}" method="post" class="form-horizontal">
+                    <form action="{{url('user/task')}}" method="post" class="form-horizontal">
                     {{csrf_field()}}
 
                     <!-- name -->
@@ -64,7 +64,7 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ url('task/edit/' .$task->id) }}" method="get">
+                                        <form action="{{ url('user/task/edit/' .$task->id) }}" method="get">
                                             {{ csrf_field() }}
 
                                             <button type="submit" class="btn btn-primary">
@@ -73,7 +73,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="{{ url('task/' .$task->id) }}" method="post">
+                                        <form action="{{ url('user/task/' .$task->id) }}" method="post">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
