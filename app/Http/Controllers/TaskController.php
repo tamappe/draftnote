@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     //
     public function index(Request $request)
     {
-        $tasks = Task::orderBy('created_at', 'asc')->get();
-        return view('task.index', [
-            'tasks' => $tasks
-        ]);
+        if (Auth::check())
+        {
+            $tasks = Task::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+            return view('task.index', [
+                'tasks' => $tasks
+            ]);
+        } else {
+            return redirect('/home');
+        }
     }
 
     public function store(Request $request)
@@ -24,6 +30,7 @@ class TaskController extends Controller
 
         // タスク作成
         $task = new Task;
+        $task->user_id = Auth::id();
         $task->name = $request->name;
         $task->text = $request->text;
         $task->save();
