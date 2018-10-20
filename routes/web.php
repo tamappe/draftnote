@@ -14,7 +14,7 @@
 use App\Task;
 use Illuminate\Http\Request;
 
-$user_path = "/user";
+$user_path = Config::get('const.user_path');
 
 Auth::routes();
 
