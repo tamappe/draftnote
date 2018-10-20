@@ -56,7 +56,14 @@
                                     </td>
 
                                     <td>
-                                        <!-- TODO 削除ボタン -->
+                                        <form action="{{ url('task/' .$task->id) }}" method="post">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i>削除
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
