@@ -16,7 +16,7 @@
 
                     <!-- name -->
                         <div class="form-group">
-                            <label for="task-name" class="col-sm-3 control-label">{{Config::get('const.memo_title')}}</label>
+                            <label for="task-name" class="col-sm-3 control-label">メモタイトル</label>
                             <div class="col-sm-8">
                                 <input type="text" name="name" id="task-name" class="form-control">
                             </div>
