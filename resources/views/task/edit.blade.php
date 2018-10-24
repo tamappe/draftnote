@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="col-sm-offset-2 col-sm-8">
+        <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     新しいToDo
@@ -20,16 +20,20 @@
                         </div>
                     <!-- name -->
                         <div class="form-group">
-                            <label for="task-name" class="col-sm-3 control-label">メモタイトル</label>
+                            <label for="task-name" class="col-sm-3 control-label">タイトル</label>
                             <div class="col-sm-8">
                                 <input type="text" name="name" id="task-name" class="form-control" value="{{$task->name}}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="task-text" class="col-sm-3 control-label">Contents:</label>
-                            <div class="col-md-8"><!-- col-md-8:幅8 -->
-                                <textarea class="form-control" rows="5" id="comment" name="text">{{$task->text}}</textarea><!-- rows:高さ -->
+                            <div class="col-md-12"><!-- col-md-8:幅8 -->
+                                <textarea id="editor" name="text" rows="8" cols="40">{{$task->text}}</textarea>
+                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+                                <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+                                <script>
+                                    var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+                                </script>
                             </div>
                         </div>
 
