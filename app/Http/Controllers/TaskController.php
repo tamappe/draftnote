@@ -13,7 +13,9 @@ class TaskController extends Controller
     {
         if (Auth::check())
         {
-            $tasks = Task::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+            $tasks = Task::where('user_id', Auth::id())
+                ->where('done', false)
+                ->orderBy('created_at', 'desc')->get();
             return view('task.index', [
                 'tasks' => $tasks
             ]);
@@ -61,6 +63,13 @@ class TaskController extends Controller
         $task->text = $request->text;
         $task->update();
 
+        return redirect('/tasks');
+    }
+
+    public function done(Request $request, Task $task)
+    {
+        $task->done = true;
+        $task->update();
         return redirect('/tasks');
     }
 }
