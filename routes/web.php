@@ -40,3 +40,6 @@ Route::get('/task/edit/{task}', 'TaskController@edit');
 // タスク更新
 Route::post('/task/edit', 'TaskController@update');
 
+// タスク完了
+Route::post('/task/{task}', 'TaskController@done');
+

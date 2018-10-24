@@ -62,7 +62,15 @@
                                     <td class="table-text">
                                         <div>{{ $task->name }}</div>
                                     </td>
+                                    <td>
+                                        <form action="{{ url('task/' .$task->id) }}" method="post">
+                                            {{ csrf_field() }}
 
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fa fa-edit"></i>done
+                                            </button>
+                                        </form>
+                                    </td>
                                     <td>
                                         <form action="{{ url('task/edit/' .$task->id) }}" method="get">
                                             {{ csrf_field() }}
