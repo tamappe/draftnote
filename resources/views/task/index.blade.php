@@ -16,14 +16,14 @@
 
                     <!-- name -->
                         <div class="form-group">
-                            <label for="task-name" class="col-sm-3 control-label">メモタイトル</label>
+                            <label for="task-name" class="col-sm-3 control-label">title</label>
                             <div class="col-sm-8">
                                 <input type="text" name="name" id="task-name" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="task-text" class="col-sm-3 control-label">Contents:</label>
+                            <label for="task-text" class="col-sm-3 control-label">Contents</label>
                             <div class="col-md-8"><!-- col-md-8:幅8 -->
                                 <textarea class="form-control" rows="5" id="comment" name="text"></textarea><!-- rows:高さ -->
                             </div>
@@ -40,7 +40,7 @@
                     </form>
                 </div>
             </div>
-            <!-- TODO: Current Tasks -->
+            <!-- Current Tasks -->
             @if(count($tasks) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
