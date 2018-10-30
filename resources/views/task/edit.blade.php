@@ -46,6 +46,15 @@
                             </div>
                         </div>
                     </form>
+                    <form action="{{ url('task/' .$task->id) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>削除
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

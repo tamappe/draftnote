@@ -58,8 +58,9 @@
 
                             <tbody>
                             @foreach($tasks as $task)
+                                @php $row = 'hidden_row'.$task->id; @endphp
                                 <tr>
-                                    <td class="table-text">
+                                    <td class="table-text" onclick="show_hide_row('{{$row}}');">
                                         <div>{{ $task->name }}</div>
                                     </td>
                                     <td>
@@ -80,6 +81,9 @@
                                             </button>
                                         </form>
                                     </td>
+                                </tr>
+                                <tr id="{{$row}}" class="hidden_row">
+                                    <td><textarea class="form-control" rows="5" id="comment" name="text" style="border:none; background-color: white;" readonly>{{$task->text}}</textarea></td>
                                     <td>
                                         <form action="{{ url('task/' .$task->id) }}" method="post">
                                             {{ csrf_field() }}

@@ -14,6 +14,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128396982-1"></script>
+
+    <!-- cssの呼び出し -->
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <!-- jsファイルの呼び出し -->
+    <script src="js/toggle.js" type="text/javascript"></script>
+    <!-- GA -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
