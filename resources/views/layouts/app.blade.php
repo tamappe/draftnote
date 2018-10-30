@@ -67,13 +67,28 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    @if($_SERVER["REQUEST_URI"] == "/done")
+                                        <!-- done page の場合 -->
+                                        <li>
+                                            <a href="{{ url('/') }}">
+                                                task page
+                                            </a>
+                                        </li>
+                                    @else
+                                        <!-- task page の場合 -->
+                                        <li>
+                                            <a href="{{ url('done') }}">
+                                                done page
+                                            </a>
+                                        </li>
+                                    @endif
+
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
-
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
