@@ -1,0 +1,6 @@
+tr:hover{
+    cursor:pointer;
+}
+.hidden_row{
+    display:none;
+}
