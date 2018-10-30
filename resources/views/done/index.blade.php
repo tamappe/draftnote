@@ -2,19 +2,18 @@
 @section('content')
     <div class="container">
         <div class="col-sm-offset-2 col-sm-8">
-                    Complete Tasks
             <!-- Current Tasks -->
             @if(count($tasks) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        現在のToDo
+                        Complete Tasks
                     </div>
 
                     <div class="panel-body">
                         <table class="table table-striped task-table">
 
                             <thead>
-                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">ToDo</th>
+                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">過去のタスク</th>
                             </thead>
 
                             <tbody>
