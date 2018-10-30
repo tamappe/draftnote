@@ -43,3 +43,7 @@ Route::post('/task/edit', 'TaskController@update');
 // タスク完了
 Route::post('/task/{task}', 'TaskController@done');
 
+// Done Tasks
+
+// 一覧画面
+Route::get('/done', 'DoneController@index');
