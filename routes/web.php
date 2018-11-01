@@ -47,3 +47,6 @@ Route::post('/task/{task}', 'TaskController@done');
 
 // 一覧画面
 Route::get('/done', 'DoneController@index');
+
+// doneのキャンセル
+Route::post('/done/{task}', 'DoneController@cancel');

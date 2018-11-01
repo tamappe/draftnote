@@ -4,7 +4,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    新しいToDo
+                    編集ページ
                 </div>
 
                 <div class="panel-body">
