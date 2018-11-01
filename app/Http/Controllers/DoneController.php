@@ -24,4 +24,11 @@ class DoneController extends Controller
             return redirect('/home');
         }
     }
+
+    public function cancel(Request $request, Task $task)
+    {
+        $task->done = false;
+        $task->update();
+        return redirect('/done');
+    }
 }
