@@ -61,8 +61,12 @@
                             </div>
                         </div>
                     </form>
-                    <div class="form-group">
-                        <a class="btn btn-success" href="{{ route('register') }}" role="button">Register</a>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <input type="button" class="btn btn-success" value="Register" onClick="location.href='{{ route('register') }}'">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
