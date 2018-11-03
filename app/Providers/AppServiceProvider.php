@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(UrlGenerator $url)
     {
         //
-        if (in_array(config('app.env'), ['prd', 'stg'], true)) {
-            $url->forceScheme('https');
+        if ($this->app->environment() == 'production') {
+            URL::forceScheme('https');
         }
     }
 
