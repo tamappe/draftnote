@@ -110,6 +110,9 @@
 
     @yield('content')
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
+
+@if(!str_contains(Request::path(), 'edit'))
+    <script src="{{ asset('js/app.js') }}"></script>
+@endif
 </body>
 </html>
