@@ -4,14 +4,17 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    新しいToDo
+                    リクエストフォーム
+                </div>
+                <div class="panel-body">
+                    管理人にChekeraで開発してほしい機能を送る事が出来ます
                 </div>
 
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                 @include('common.errors')
                 <!-- new task form -->
-                    <form action="{{url('task')}}" method="post" class="form-horizontal">
+                    <form action="{{url('user_request')}}" method="post" class="form-horizontal">
                     {{csrf_field()}}
 
                     <!-- name -->
@@ -33,7 +36,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-btn fa-plus"></i>ToDoを作成する
+                                    <i class="fa fa-btn fa-plus"></i>希望を伝える
                                 </button>
                             </div>
                         </div>
@@ -41,59 +44,42 @@
                 </div>
             </div>
             <!-- Current Tasks -->
-            @if(count($tasks) > 0)
+            @if(count($user_requests) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        現在のToDo
+                        リクエスト一覧
                     </div>
 
                     <div class="panel-body">
                         <table class="table table-striped task-table">
 
                             <thead>
-                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">ToDo</th>
-                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
+                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">リクエスト</th>
                             <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
                             </thead>
 
                             <tbody>
-                            @foreach($tasks as $task)
-                                @php $row = 'hidden_row'.$task->id; @endphp
+                            @foreach($user_requests as $user_request)
+                                @php $row = 'hidden_row'.$user_request->id; @endphp
                                 <tr>
                                     <td class="table-text" onclick="show_hide_row('{{$row}}');">
-                                        <div>{{ $task->name }}</div>
+                                        <div>{{ $user_request->name }}</div>
                                     </td>
-                                    <td>
-                                        <form action="{{ url('task/' .$task->id) }}" method="post">
-                                            {{ csrf_field() }}
+                                    @if($user_request->user_id == $user_id)
+                                        <td>
+                                            <form action="{{ url('user_request/' .$user_request->id) }}" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-success">
-                                                <i class="fa fa-edit"></i>done
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="{{ url('task/edit/' .$task->id) }}" method="get">
-                                            {{ csrf_field() }}
-
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-edit"></i>編集
-                                            </button>
-                                        </form>
-                                    </td>
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i>削除
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                                 <tr id="{{$row}}" class="hidden_row">
-                                    <td><textarea class="form-control" rows="5" id="comment" name="text" style="border:none; background-color: white;" readonly>{{$task->text}}</textarea></td>
-                                    <td>
-                                        <form action="{{ url('task/' .$task->id) }}" method="post">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-trash"></i>削除
-                                            </button>
-                                        </form>
-                                    </td>
+                                    <td><textarea class="form-control" rows="5" id="comment" name="text" style="border:none; background-color: white;" readonly>{{$user_request->text}}</textarea></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -102,7 +88,7 @@
                     </div>
                 </div>
             @endif
-            {{ $tasks->links() }}
+            {{ $user_requests->links() }}
         </div>
     </div>
 @endsection

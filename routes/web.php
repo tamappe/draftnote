@@ -50,3 +50,14 @@ Route::get('/done', 'DoneController@index');
 
 // doneのキャンセル
 Route::post('/done/{task}', 'DoneController@cancel');
+
+// User Feedback From
+
+// 一覧画面
+Route::get('/user_request', 'UserRequestController@index');
+
+// リクエスト追加
+Route::post('/user_request', 'UserRequestController@store');
+
+// リクエスト削除
+Route::delete('/user_request/{user_request}', 'UserRequestController@destroy');
