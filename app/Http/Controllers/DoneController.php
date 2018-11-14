@@ -16,7 +16,8 @@ class DoneController extends Controller
         {
             $tasks = Task::where('user_id', Auth::id())
                 ->where('done', true)
-                ->orderBy('created_at', 'desc')->get();
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
             return view('done.index', [
                 'tasks' => $tasks
             ]);
