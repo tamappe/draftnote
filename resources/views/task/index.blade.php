@@ -98,9 +98,11 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {{--{{ $tasks->links() }}--}}
                     </div>
                 </div>
             @endif
+            {{ $tasks->links() }}
         </div>
     </div>
 @endsection

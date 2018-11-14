@@ -40,6 +40,7 @@
                     </div>
                 </div>
             @endif
+            {{ $tasks->links() }}
         </div>
     </div>
 @endsection
