@@ -87,7 +87,13 @@
                                             done page
                                         </a>
                                     </li>
-                                @endif
+                            @endif
+                            <!-- task page の場合 -->
+                                <li>
+                                    <a href="{{ url('user_request') }}">
+                                        request form
+                                    </a>
+                                </li>
 
                                 <li>
                                     <a href="{{ route('logout') }}"
