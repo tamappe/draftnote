@@ -61,3 +61,9 @@ Route::post('/user_request', 'UserRequestController@store');
 
 // リクエスト削除
 Route::delete('/user_request/{user_request}', 'UserRequestController@destroy');
+
+
+// Projects
+
+// 新規プロジェクト作成
+Route::post('/project', 'ProjectController@store');

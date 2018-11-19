@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         $this->notify(new CustomPasswordReset($token));
     }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Project');
+    }
 }

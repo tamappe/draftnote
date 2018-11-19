@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,15 +12,28 @@ class TaskController extends Controller
     //
     public function index(Request $request)
     {
-        if (Auth::check())
-        {
-            $tasks = Task::where('user_id', Auth::id())
-                ->where('done', false)
-                ->orderBy('created_at', 'desc')
-                ->paginate(20);
-            return view('task.index', [
-                'tasks' => $tasks
-            ]);
+        if (Auth::check()) {
+            $user = Auth::user();
+            $project = User::find($user->id)->projects()
+                ->where('id', $user->current_project_id)->first();
+            if ($user->current_project_id == null) {
+                // まだプロジェクトを持っていないユーザーの対応
+                $tasks = Task::where('user_id', $user->id)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+                return view('task.index', [
+                    'tasks' => $tasks
+                ]);
+            } else {
+                // プロジェクトマイグレーション済みのユーザー
+                $tasks = $project->tasks()
+                    ->where('done', false)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+                return view('task.index', [
+                    'tasks' => $tasks
+                ]);
+            }
         } else {
             return redirect('/home');
         }
@@ -32,10 +46,12 @@ class TaskController extends Controller
         ]);
 
         // タスク作成
+        $user = Auth::user();
         $task = new Task;
-        $task->user_id = Auth::id();
+        $task->user_id = $user->id;
         $task->name = $request->name;
         $task->text = $request->text;
+        $task->project_id = $user->current_project_id;
         $task->save();
 
         return redirect('/tasks');

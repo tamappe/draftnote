@@ -40,7 +40,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#modal1">
                 <i class="fa fa-btn fa-plus"></i>新規プロジェクトの作成
             </button>
@@ -61,7 +61,7 @@
                             {{ csrf_field() }}
 
                             <div class="modal-body">
-                                <input type="text" name="name" id="task-name" class="form-control">
+                                <input type="text" name="name" id="project-name" class="form-control">
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-default">
