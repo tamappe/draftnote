@@ -40,8 +40,10 @@
                     </form>
                 </div>
             </div>
-
-            <button data-toggle="modal" data-target="#modal1" >新規プロジェクトの作成</button>
+            
+            <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#modal1">
+                <i class="fa fa-btn fa-plus"></i>新規プロジェクトの作成
+            </button>
 
             <!-- モーダルダイアログ -->
             <div class="modal" id="modal1" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
@@ -58,7 +60,7 @@
                         <form action="{{url('project')}}" method="post">
                             {{ csrf_field() }}
 
-                            <div class="modal-body"
+                            <div class="modal-body">
                                 <input type="text" name="name" id="task-name" class="form-control">
                             </div>
                             <div class="modal-footer">
