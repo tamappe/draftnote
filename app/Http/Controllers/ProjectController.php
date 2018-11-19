@@ -42,8 +42,10 @@ class ProjectController extends Controller
         $user = Auth::user();
         $user->current_project_id = $project->id;
         $user->update();
-
-        $tasks = Task::where('user_id', Auth::id())
+        
+        $projects = User::find(Auth::id())->projects();
+        $p = $projects->where('id', $user->current_project_id)->first();
+        $tasks = $p->tasks()
             ->where('done', false)
             ->where('project_id', $project->id)
             ->orderBy('created_at', 'desc')
