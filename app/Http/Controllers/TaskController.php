@@ -14,8 +14,6 @@ class TaskController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $project = User::find($user->id)->projects()
-                ->where('id', $user->current_project_id)->first();
             if ($user->current_project_id == null) {
                 // まだプロジェクトを持っていないユーザーの対応
                 $tasks = Task::where('user_id', $user->id)
@@ -26,6 +24,8 @@ class TaskController extends Controller
                 ]);
             } else {
                 // プロジェクトマイグレーション済みのユーザー
+                $project = User::find($user->id)->projects()
+                    ->where('id', $user->current_project_id)->first();
                 $tasks = $project->tasks()
                     ->where('done', false)
                     ->orderBy('created_at', 'desc')

@@ -19,10 +19,16 @@ class ProjectController extends Controller
         $user_projects = User::find(Auth::id())->projects;
         if ($user_projects->isEmpty()) {
             $user_tasks = Task::where('user_id', Auth::id())->get();
-
-            foreach ($user_tasks as $task) {
-                $task->project_id = count($projects) + 1;
-                $task->update();
+            if (count($user_tasks) > 0) {
+                // プロジェクト作成
+                $first_project = new Project();
+                $first_project->user_id = Auth::id();
+                $first_project->name = 'First Project';
+                $first_project->save();
+                foreach ($user_tasks as $task) {
+                    $task->project_id = count($projects) + 1;
+                    $task->update();
+                }
             }
         }
 
