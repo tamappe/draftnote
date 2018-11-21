@@ -8,6 +8,7 @@ use App\User;
 use App\Task;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class ProjectController extends Controller
 {
@@ -23,7 +24,7 @@ class ProjectController extends Controller
                 // プロジェクト作成
                 $first_project = new Project();
                 $first_project->user_id = Auth::id();
-                $first_project->name = 'First Project';
+                $first_project->title = 'First Project';
                 $first_project->save();
                 foreach ($user_tasks as $task) {
                     $task->project_id = count($projects) + 1;
@@ -35,14 +36,24 @@ class ProjectController extends Controller
         // 2つ目以降のプロジェクトの作成
 
         // バリデーション
-        $this->validate($request, [
-            'name' => 'required|max:255'
-        ]);
+        $messages = [
+            'title.required' => 'プロジェクト名を入力してください',
+        ];
+        $rules = [
+            'title' => 'required|max:255'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect('/tasks')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         // プロジェクト作成
         $project = new Project();
         $project->user_id = Auth::id();
-        $project->name = $request->name;
+        $project->title = $request->title;
         $project->save();
 
         $user = Auth::user();

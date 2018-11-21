@@ -14,7 +14,7 @@
                 {{ csrf_field() }}
 
                 <div class="modal-body">
-                    <input type="text" name="name" id="project-name" class="form-control">
+                    <input type="text" name="title" id="project-title" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-default">
