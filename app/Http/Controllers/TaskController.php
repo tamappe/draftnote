@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,18 +21,21 @@ class TaskController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->paginate(20);
                 return view('task.index', [
-                    'tasks' => $tasks
+                    'tasks' => $tasks,
+                    'current_project_id' => null
                 ]);
             } else {
                 // プロジェクトマイグレーション済みのユーザー
-                $project = User::find($user->id)->projects()
-                    ->where('id', $user->current_project_id)->first();
+                $projects = $user->projects;
+                $project = $projects->where('id', $user->current_project_id)->first();
                 $tasks = $project->tasks()
                     ->where('done', false)
                     ->orderBy('created_at', 'desc')
                     ->paginate(20);
                 return view('task.index', [
-                    'tasks' => $tasks
+                    'tasks' => $tasks,
+                    'projects' => $projects,
+                    'current_project_id' => $user->current_project_id
                 ]);
             }
         } else {
@@ -87,6 +91,17 @@ class TaskController extends Controller
     {
         $task->done = true;
         $task->update();
+        return redirect('/tasks');
+    }
+
+    public function change(Request $request, Project $project)
+    {
+        // プロジェクトIdの更新
+        $user = Auth::user();
+        $projects = $user->projects;
+        $user->current_project_id = $project->id;
+        $user->update();
+
         return redirect('/tasks');
     }
 }

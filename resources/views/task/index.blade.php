@@ -46,8 +46,23 @@
                 <i class="fa fa-btn fa-plus"></i>新規プロジェクトの作成
             </button>
 
-        @include('layouts.modal')
+            @include('layouts.modal')
 
+            @if($current_project_id != null)
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        {{\App\Project::find($current_project_id)->title}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach($projects as $project)
+                            @if($project->id != $current_project_id)
+                                <li><a href="{{ url('task/change/' .$project->id) }}">{{ $project->title }}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
         <!-- 現在のタスク -->
             @if(count($tasks) > 0)

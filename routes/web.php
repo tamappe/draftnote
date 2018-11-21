@@ -43,6 +43,9 @@ Route::post('/task/edit', 'TaskController@update');
 // タスク完了
 Route::post('/task/{task}', 'TaskController@done');
 
+// プロジェクトの変更
+Route::get('/task/change/{project}', 'TaskController@change');
+
 // Done Tasks
 
 // 一覧画面
