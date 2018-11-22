@@ -70,3 +70,6 @@ Route::delete('/user_request/{user_request}', 'UserRequestController@destroy');
 
 // 新規プロジェクト作成
 Route::post('/project', 'ProjectController@store');
+
+// タスク編集
+Route::get('/project/edit/{project}', 'ProjectController@edit');

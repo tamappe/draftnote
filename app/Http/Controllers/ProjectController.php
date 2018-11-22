@@ -67,4 +67,11 @@ class ProjectController extends Controller
             }
         }
     }
+
+    public function edit(Request $request, Project $project)
+    {
+        $project->title = $request->title;
+        $project->update();
+        return redirect('/tasks');
+    }
 }

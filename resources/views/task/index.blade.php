@@ -49,6 +49,7 @@
             @include('layouts.modal-new')
 
             @if($tasks[0]->project->user->current_project_id != null)
+                @include('layouts.modal-edit', ['project' => $tasks[0]->project])
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -60,7 +61,10 @@
                                 <li><a href="{{ url('task/change/' .$project->id) }}">{{ $project->title }}</a></li>
                             @endif
                         @endforeach
+                        <li><a data-toggle="modal" data-target="#modal-edit">名前の編集</a></li>
                     </ul>
+
+                    </button>
                 </div>
             @endif
 
