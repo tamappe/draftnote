@@ -43,6 +43,9 @@ Route::post('/task/edit', 'TaskController@update');
 // タスク完了
 Route::post('/task/{task}', 'TaskController@done');
 
+// プロジェクトの変更
+Route::get('/task/change/{project}', 'TaskController@change');
+
 // Done Tasks
 
 // 一覧画面
@@ -61,3 +64,12 @@ Route::post('/user_request', 'UserRequestController@store');
 
 // リクエスト削除
 Route::delete('/user_request/{user_request}', 'UserRequestController@destroy');
+
+
+// Projects
+
+// 新規プロジェクト作成
+Route::post('/project', 'ProjectController@store');
+
+// タスク編集
+Route::get('/project/edit/{project}', 'ProjectController@edit');
