@@ -4,7 +4,7 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    新しいToDo
+                    新しいChekera
                 </div>
 
                 <div class="panel-body">
@@ -25,7 +25,8 @@
                         <div class="form-group">
                             <label for="task-text" class="col-sm-3 control-label">Contents</label>
                             <div class="col-md-8"><!-- col-md-8:幅8 -->
-                                <textarea class="form-control" rows="5" id="comment" name="text"></textarea><!-- rows:高さ -->
+                                <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                                <!-- rows:高さ -->
                             </div>
                         </div>
 
@@ -33,75 +34,47 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-btn fa-plus"></i>ToDoを作成する
+                                    <i class="fa fa-btn fa-plus"></i>Check it out
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- Current Tasks -->
+
             @if(count($tasks) > 0)
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        現在のToDo
-                    </div>
+                <button class="btn btn-default" data-toggle="modal" data-target="#modal-new">
+                    <i class="fa fa-btn fa-plus"></i>新規プロジェクト
+                </button>
 
-                    <div class="panel-body">
-                        <table class="table table-striped task-table">
-
-                            <thead>
-                            <th class="col-xs-3 col-ms-3 col-md-8 col-lg-8">ToDo</th>
-                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
-                            <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">&nbsp;</th>
-                            </thead>
-
-                            <tbody>
-                            @foreach($tasks as $task)
-                                @php $row = 'hidden_row'.$task->id; @endphp
-                                <tr>
-                                    <td class="table-text" onclick="show_hide_row('{{$row}}');">
-                                        <div>{{ $task->name }}</div>
-                                    </td>
-                                    <td>
-                                        <form action="{{ url('task/' .$task->id) }}" method="post">
-                                            {{ csrf_field() }}
-
-                                            <button type="submit" class="btn btn-success">
-                                                <i class="fa fa-edit"></i>done
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form action="{{ url('task/edit/' .$task->id) }}" method="get">
-                                            {{ csrf_field() }}
-
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-edit"></i>編集
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr id="{{$row}}" class="hidden_row">
-                                    <td><textarea class="form-control" rows="5" id="comment" name="text" style="border:none; background-color: white;" readonly>{{$task->text}}</textarea></td>
-                                    <td>
-                                        <form action="{{ url('task/' .$task->id) }}" method="post">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-trash"></i>削除
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                @include('layouts.modal-new')
+                @php
+                    // これをキーにしてプロジェクトのタイトルやidなどをセットしていく
+                    $first_task = $tasks[0];
+                @endphp
+                @if($first_task->project != null && $first_task->project->user->current_project_id != null)
+                    @include('layouts.modal-edit', ['project' => $first_task->project])
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            {{ $first_task->project->title}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @foreach($first_task->project->user->projects as $project)
+                                @if($project->id != $first_task->project->user->current_project_id)
+                                    <li><a href="{{ url('task/change/' .$project->id) }}">{{ $project->title }}</a></li>
+                                @endif
                             @endforeach
-                            </tbody>
-                        </table>
-                        {{--{{ $tasks->links() }}--}}
+                            <li><a data-toggle="modal" data-target="#modal-edit">名前の編集</a></li>
+                        </ul>
+
+                        </button>
                     </div>
-                </div>
+                @endif
             @endif
+
+        <!-- 現在のタスク -->
+            @include('layouts.table-body', ['tasks' => $tasks])
             {{ $tasks->links() }}
         </div>
     </div>
