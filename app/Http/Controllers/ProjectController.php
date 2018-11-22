@@ -24,7 +24,7 @@ class ProjectController extends Controller
             'title.required' => 'プロジェクト名を入力してください',
         ];
         $rules = [
-            'title' => 'required|max:255'
+            'title' => 'required|max:30'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
 
