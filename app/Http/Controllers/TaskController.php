@@ -22,7 +22,6 @@ class TaskController extends Controller
                     ->paginate(20);
                 return view('task.index', [
                     'tasks' => $tasks,
-                    'current_project_id' => null
                 ]);
             } else {
                 // プロジェクトマイグレーション済みのユーザー
@@ -34,8 +33,6 @@ class TaskController extends Controller
                     ->paginate(20);
                 return view('task.index', [
                     'tasks' => $tasks,
-                    'projects' => $projects,
-                    'current_project_id' => $user->current_project_id
                 ]);
             }
         } else {

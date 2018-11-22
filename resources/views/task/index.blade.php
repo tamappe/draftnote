@@ -42,21 +42,21 @@
                 </div>
             </div>
 
-            <button class="btn btn-default" data-toggle="modal" data-target="#modal1">
+            <button class="btn btn-default" data-toggle="modal" data-target="#modal-new">
                 <i class="fa fa-btn fa-plus"></i>新規プロジェクトの作成
             </button>
 
-            @include('layouts.modal')
+            @include('layouts.modal-new')
 
-            @if($current_project_id != null)
+            @if($tasks[0]->project->user->current_project_id != null)
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                        {{\App\Project::find($current_project_id)->title}} <span class="caret"></span>
+                        {{ $tasks[0]->project->title}} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        @foreach($projects as $project)
-                            @if($project->id != $current_project_id)
+                        @foreach($tasks[0]->project->user->projects as $project)
+                            @if($project->id != $tasks[0]->project->user->current_project_id)
                                 <li><a href="{{ url('task/change/' .$project->id) }}">{{ $project->title }}</a></li>
                             @endif
                         @endforeach
